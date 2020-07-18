@@ -1,0 +1,17 @@
+.btnContainer {
+
+}
+
+.btn {
+    outline: none;
+    font-size: 35px;
+    cursor: pointer;
+    border: 2px solid #bada55;
+    background-color: #222222;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+.dis {
+    opacity: 0.5;
+}

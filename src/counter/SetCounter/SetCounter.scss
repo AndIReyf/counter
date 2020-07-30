@@ -1,0 +1,30 @@
+.SetCounter {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #bada55;
+  box-shadow: 0 0 5px 2px #bada55;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 5px;
+  width: 300px;
+  height: 200px;
+
+  .settings {
+    height: 65%;
+    background-color: #222222;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    .settingsValue {
+      display: flex;
+      justify-content: space-evenly;
+
+      .title {
+        align-self: center;
+        color: #ffffff;
+      }
+    }
+  }
+}

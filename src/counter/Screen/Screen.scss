@@ -11,6 +11,17 @@
     font-size: 80px;
     font-weight: 700;
     color: #ffffff;
+    display: flex;
+
+    .error{
+      color: #da5555;
+    }
+
+    span{
+      color: #bada55;
+      align-self: center;
+      font-size: 25px;
+    }
   }
 
   .max {

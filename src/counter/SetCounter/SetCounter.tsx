@@ -1,28 +1,56 @@
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 import './SetCounter.scss'
 import {Button} from "../Button/Button";
 import {Input} from "../Input/Input";
 
-type PropsType = {}
+type PropsType = {
+    setValueForCount: (valueS: string, valueM: string) => void
+    isError: (v: boolean) => void
+}
 
 export function SetCounter(props: PropsType) {
 
     const setBtn: string = 'Set';
+    const [inpValueMax, setInpValueMax] = useState('1');
+    const [inpValueStart, setInpValueStart] = useState('0');
+    const changeInpValueMax = (e: ChangeEvent<HTMLInputElement>) => setInpValueMax(e.currentTarget.value)
+    const changeInpValueStart = (e: ChangeEvent<HTMLInputElement>) => setInpValueStart(e.currentTarget.value)
+    const setValue = () => props.setValueForCount(inpValueStart, inpValueMax)
+    const setBtnDis = () => +inpValueMax <= +inpValueStart || +inpValueMax < 0 || +inpValueStart < 0 || +inpValueStart >= +inpValueMax
+    const checkMaxVError = () => {
+        let value = +inpValueMax <= +inpValueStart || +inpValueMax < 0
+        props.isError(value);
+        return value
+    }
+    const checkStartVError = () => {
+        let value = +inpValueStart < 0 || +inpValueStart >= +inpValueMax
+        props.isError(value);
+        return value
+    }
 
     return (
         <div className={'SetCounter'}>
             <div className={'settings'}>
                 <div className={'settingsValue'}>
                     <div className={'title'}>Max value</div>
-                    <Input />
+                    <Input
+                        error={checkMaxVError()}
+                        inpValue={inpValueMax}
+                        changeInpValue={changeInpValueMax}/>
                 </div>
                 <div className={'settingsValue'}>
                     <div className={'title'}>Start value</div>
-                    <Input />
+                    <Input
+                        error={checkStartVError()}
+                        inpValue={inpValueStart}
+                        changeInpValue={changeInpValueStart}/>
                 </div>
             </div>
             <div className={'btnBox'}>
-                <Button btnType={setBtn} disabled={false} onClick={() => {}}/>
+                <Button
+                    btnType={setBtn}
+                    disabled={setBtnDis()}
+                    onClick={setValue}/>
             </div>
         </div>
     )

@@ -8,5 +8,9 @@
     border: none;
     outline: none;
     padding: 5px;
+
+    &.error{
+      background-color: #da5555;
+    }
   }
 }

@@ -8,11 +8,17 @@ type PropsType = {
     isError: (v: boolean) => void
 }
 
+function restoreState<T>(key: string, defaultState: T) {
+    const stateAsString = localStorage.getItem(key);
+    if (stateAsString !== null) defaultState = JSON.parse(stateAsString) as T;
+    return defaultState;
+}
+
 export function SetCounter(props: PropsType) {
 
     const setBtn: string = 'Set';
-    const [inpValueMax, setInpValueMax] = useState('1');
-    const [inpValueStart, setInpValueStart] = useState('0');
+    const [inpValueMax, setInpValueMax] = useState(restoreState('maxValue', '1'));
+    const [inpValueStart, setInpValueStart] = useState(restoreState('startValue', '0'));
     const changeInpValueMax = (e: ChangeEvent<HTMLInputElement>) => setInpValueMax(e.currentTarget.value)
     const changeInpValueStart = (e: ChangeEvent<HTMLInputElement>) => setInpValueStart(e.currentTarget.value)
     const setValue = () => props.setValueForCount(inpValueStart, inpValueMax)

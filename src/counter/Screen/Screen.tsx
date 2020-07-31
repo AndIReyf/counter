@@ -8,12 +8,9 @@ type PropsType = {
 }
 
 export function Screen(props: PropsType) {
-
-    const addClassMax = () => props.maxValue ? 'max' : '';
-
     return (
         <div className={'Screen'}>
-            <div className={`screenNumber ${addClassMax()}`}>
+            <div className={`screenNumber ${props.maxValue ? 'max' : ''}`}>
                 {
                     props.error
                         ? <span className={'error'}>Incorrect value</span>

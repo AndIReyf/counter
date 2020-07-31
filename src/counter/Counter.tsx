@@ -4,11 +4,16 @@ import {Screen} from "./Screen/Screen";
 import {Button} from "./Button/Button";
 import {SetCounter} from "./SetCounter/SetCounter";
 
+function saveState<T> (key: string, state: T) {
+    const stateAsString = JSON.stringify(state);
+    localStorage.setItem(key, stateAsString)
+}
+
 export function Counter() {
 
     const incCounter: string = 'Inc';
     const resCounter: string = 'Res';
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
     const [settings, setSettings] = useState<{[key:string]: number}>({});
     const [count, setCount] = useState<number | null>(null);
 
@@ -20,13 +25,12 @@ export function Counter() {
     const resetCounter = () => setCount(settings.startValue);
     const setValueForCount = (valueS: string, valueM: string) => {
         const settingsValue = {startValue: +valueS, maxValue: +valueM};
+        saveState('startValue', +valueS)
+        saveState('maxValue', +valueM)
         setSettings(settingsValue)
         setCount(settingsValue.startValue)
     }
-
-    const isError = (value: boolean) => {
-        setError(value)
-    }
+    const isError = (value: boolean) => setError(value)
 
     return (
         <div className={'Counter'}>
